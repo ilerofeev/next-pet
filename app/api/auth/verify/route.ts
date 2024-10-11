@@ -1,4 +1,5 @@
 import { prisma } from "@/prisma/prisma-client";
+import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -36,6 +37,10 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.redirect(new URL("/?verified", req.url));
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
+
     console.error(error);
     console.log("[VERIFY_GET] Server error", error);
   }

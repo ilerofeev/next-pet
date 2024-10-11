@@ -79,7 +79,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
                   url: item.sourceUrl,
                 })) || []
               }
-              defaultInterval={300000}
+              defaultInterval={3000}
               width={520}
               height={750}
             />
